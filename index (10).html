@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sir Isaac Jux — HQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000000;--surface:#050505;--arc:#00cfff;--arc-dim:rgba(0,207,255,0.08);--arc-glow:rgba(0,207,255,0.35);--white:rgba(255,255,255,0.92);--muted:rgba(255,255,255,0.3);--border:rgba(255,255,255,0.06);--border-bright:rgba(0,207,255,0.25);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{position:fixed;width:8px;height:8px;background:var(--arc);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:transform .1s,width .2s,height .2s;box-shadow:0 0 10px var(--arc),0 0 20px var(--arc-glow);}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(0,207,255,0.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .15s ease-out,width .2s,height .2s;}
+.cursor.h{width:12px;height:12px;}.cursor-ring.h{width:48px;height:48px;border-color:var(--arc);}
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.015) 2px,rgba(0,0,0,0.015) 4px);}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:40px 20px;}
+.grid-bg{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(0,207,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,207,255,0.03) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite;}
+@keyframes gridMove{from{background-position:0 0}to{background-position:60px 60px}}
+.hero-glow{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,207,255,0.06) 0%,transparent 70%);animation:glowPulse 4s ease-in-out infinite;}
+@keyframes glowPulse{0%,100%{opacity:0.6}50%{opacity:1}}
+.corner{position:absolute;width:60px;height:60px;z-index:2;}
+.corner::before,.corner::after{content:'';position:absolute;background:var(--arc);}
+.corner::before{width:100%;height:1px;top:0;}.corner::after{width:1px;height:100%;top:0;}
+.corner.tl{top:24px;left:24px;}.corner.tr{top:24px;right:24px;transform:scaleX(-1);}.corner.bl{bottom:24px;left:24px;transform:scaleY(-1);}.corner.br{bottom:24px;right:24px;transform:scale(-1);}
+.reactor-wrap{position:relative;z-index:5;margin-bottom:48px;animation:fadeDown 1s ease both;}
+.reactor{position:relative;width:120px;height:120px;display:flex;align-items:center;justify-content:center;}
+.r-ring{position:absolute;border-radius:50%;border-style:solid;border-color:transparent;animation:spin linear infinite;}
+.r-ring:nth-child(1){width:120px;height:120px;border-width:1px;border-top-color:rgba(0,207,255,0.6);border-right-color:rgba(0,207,255,0.2);animation-duration:6s;}
+.r-ring:nth-child(2){width:95px;height:95px;border-width:1px;border-top-color:rgba(0,207,255,0.4);border-left-color:rgba(0,207,255,0.15);animation-duration:4s;animation-direction:reverse;}
+.r-ring:nth-child(3){width:70px;height:70px;border-width:1px;border-top-color:rgba(0,207,255,0.8);border-bottom-color:rgba(0,207,255,0.2);animation-duration:3s;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.r-core{width:44px;height:44px;border-radius:50%;z-index:2;background:radial-gradient(circle,rgba(0,207,255,0.9) 0%,rgba(0,100,200,0.5) 50%,transparent 70%);box-shadow:0 0 20px var(--arc),0 0 40px var(--arc-glow),0 0 80px rgba(0,207,255,0.1);animation:corePulse 2s ease-in-out infinite;}
+@keyframes corePulse{0%,100%{box-shadow:0 0 20px var(--arc),0 0 40px var(--arc-glow),0 0 80px rgba(0,207,255,0.1)}50%{box-shadow:0 0 30px var(--arc),0 0 60px var(--arc-glow),0 0 120px rgba(0,207,255,0.15)}}
+.hero-content{position:relative;z-index:5;text-align:center;}
+.jarvis-label{font-family:'Share Tech Mono';font-size:0.6rem;letter-spacing:0.4em;color:var(--arc);opacity:0.7;margin-bottom:12px;animation:fadeDown 1s ease .2s both;}
+.hero-name{font-family:'Orbitron';font-weight:900;font-size:clamp(2.5rem,8vw,5rem);line-height:0.95;letter-spacing:-0.02em;color:var(--white);text-shadow:0 0 60px rgba(0,207,255,0.15);margin-bottom:8px;animation:fadeDown 1s ease .4s both;}
+.hero-name span{color:var(--arc);}
+.hero-subtitle{font-size:clamp(0.75rem,2vw,0.9rem);letter-spacing:0.3em;color:var(--muted);font-family:'Share Tech Mono';margin-bottom:40px;animation:fadeDown 1s ease .6s both;}
+.jarvis-greeting{max-width:520px;margin:0 auto 48px;padding:20px 28px;border:1px solid var(--border-bright);border-radius:2px;background:rgba(0,207,255,0.03);font-size:0.85rem;line-height:1.8;color:rgba(255,255,255,0.75);position:relative;animation:fadeDown 1s ease .8s both;}
+.jarvis-greeting::before{content:'◈ J.A.R.V.I.S';position:absolute;top:-10px;left:20px;background:var(--bg);padding:0 8px;font-family:'Share Tech Mono';font-size:0.52rem;color:var(--arc);letter-spacing:0.2em;}
+.typing-cursor{display:inline-block;width:2px;height:1em;background:var(--arc);vertical-align:middle;animation:blink .8s infinite;margin-left:2px;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border:1px solid var(--arc);border-radius:2px;background:transparent;color:var(--arc);font-family:'Share Tech Mono';font-size:0.7rem;letter-spacing:0.2em;cursor:none;transition:all .2s;text-decoration:none;animation:fadeDown 1s ease 1s both;position:relative;overflow:hidden;}
+.cta-btn::before{content:'';position:absolute;inset:0;background:var(--arc);transform:translateX(-101%);transition:transform .3s ease;}
+.cta-btn:hover::before{transform:translateX(0);}.cta-btn:hover{color:#000;}
+.cta-btn span,.cta-arrow{position:relative;z-index:1;}
+.cta-btn:hover .cta-arrow{transform:translateX(4px);}
+.cta-arrow{transition:transform .2s;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeDown 1s ease 1.5s both;}
+.scroll-hint span{font-family:'Share Tech Mono';font-size:0.48rem;letter-spacing:0.3em;color:var(--muted);}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--arc),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+.socials-section{min-height:100vh;padding:100px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;}
+.section-header{text-align:center;margin-bottom:64px;}
+.section-tag{font-family:'Share Tech Mono';font-size:0.55rem;letter-spacing:0.35em;color:var(--arc);opacity:0.6;margin-bottom:12px;}
+.section-title{font-family:'Orbitron';font-weight:700;font-size:clamp(1.5rem,4vw,2.5rem);letter-spacing:0.1em;}
+.socials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;width:100%;max-width:900px;}
+.social-card{position:relative;overflow:hidden;padding:28px 24px;border:1px solid var(--border);border-radius:2px;background:var(--surface);text-decoration:none;color:var(--white);cursor:none;transition:border-color .3s,transform .3s;display:flex;align-items:center;gap:20px;}
+.social-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,207,255,0.04) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
+.social-card:hover{border-color:var(--border-bright);transform:translateY(-2px);}.social-card:hover::before{opacity:1;}
+.social-card:hover .card-arrow{transform:translateX(4px);opacity:1;}.social-card:hover .card-icon{box-shadow:0 0 20px rgba(0,207,255,0.3);}
+.card-icon{width:48px;height:48px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);transition:box-shadow .3s;}
+.card-info{flex:1;}
+.card-platform{font-family:'Share Tech Mono';font-size:0.52rem;letter-spacing:0.25em;color:var(--muted);margin-bottom:4px;}
+.card-name{font-family:'Orbitron';font-weight:700;font-size:0.9rem;letter-spacing:0.05em;}
+.card-arrow{font-size:0.9rem;color:var(--arc);opacity:0;transition:all .2s;}
+.card-line{position:absolute;bottom:0;left:0;height:2px;width:0;transition:width .4s ease;}
+.social-card:hover .card-line{width:100%;}
+.social-card.featured{grid-column:1/-1;background:linear-gradient(135deg,rgba(0,207,255,0.05) 0%,rgba(0,0,0,0) 50%);border-color:rgba(0,207,255,0.15);}
+.featured .card-icon{width:56px;height:56px;font-size:1.6rem;}.featured .card-name{font-size:1.1rem;}
+.featured-badge{position:absolute;top:16px;right:20px;font-family:'Share Tech Mono';font-size:0.48rem;letter-spacing:0.2em;color:var(--arc);border:1px solid var(--arc);padding:3px 8px;border-radius:2px;opacity:0.7;}
+.footer{padding:48px 20px;text-align:center;border-top:1px solid var(--border);}
+.footer-logo{font-family:'Orbitron';font-weight:900;font-size:0.8rem;letter-spacing:0.4em;color:var(--arc);opacity:0.4;margin-bottom:8px;}
+.footer-text{font-family:'Share Tech Mono';font-size:0.5rem;letter-spacing:0.2em;color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<section class="hero" id="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="reactor-wrap">
+    <div class="reactor">
+      <div class="r-ring"></div><div class="r-ring"></div><div class="r-ring"></div>
+      <div class="r-core"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="jarvis-label">◈ STARK INDUSTRIES · PERSONAL UNIT</div>
+    <h1 class="hero-name">SIR ISAAC<br><span>JUX</span></h1>
+    <p class="hero-subtitle">HEADQUARTERS · EST. 2025</p>
+    <div class="jarvis-greeting">
+      <span id="typingText"></span><span class="typing-cursor"></span>
+    </div>
+    <a href="#socials" class="cta-btn">
+      <span>ACCESS SOCIALS</span>
+      <span class="cta-arrow">→</span>
+    </a>
+  </div>
+  <div class="scroll-hint"><span>SCROLL</span><div class="scroll-line"></div></div>
+</section>
+
+<section class="socials-section" id="socials">
+  <div class="section-header">
+    <div class="section-tag">◈ INTELLIGENCE NETWORK</div>
+    <h2 class="section-title">FIND JUX</h2>
+  </div>
+  <div class="socials-grid">
+    <a href="https://discord.gg/kJ4uZE7nds" target="_blank" class="social-card featured">
+      <div class="card-icon">🛡️</div>
+      <div class="card-info">
+        <div class="card-platform">◈ DISCORD SERVER</div>
+        <div class="card-name">JUX HEADQUARTERS</div>
+        <div style="font-size:.7rem;color:rgba(255,255,255,0.4);margin-top:4px;font-family:'Share Tech Mono'">discord.gg/kJ4uZE7nds</div>
+      </div>
+      <span class="card-arrow">→</span>
+      <div class="featured-badge">MAIN BASE</div>
+      <div class="card-line" style="background:var(--arc)"></div>
+    </a>
+    <a href="https://discord.com/users/997813750591660052" target="_blank" class="social-card">
+      <div class="card-icon">💬</div>
+      <div class="card-info"><div class="card-platform">◈ DISCORD</div><div class="card-name">JUXTOTHX</div></div>
+      <span class="card-arrow">→</span>
+      <div class="card-line" style="background:#5865f2"></div>
+    </a>
+    <a href="https://www.youtube.com/channel/UCzHQ9uz1OyUkyKYUiTHvy5A" target="_blank" class="social-card">
+      <div class="card-icon">▶️</div>
+      <div class="card-info"><div class="card-platform">◈ YOUTUBE</div><div class="card-name">JUXTOTHX</div></div>
+      <span class="card-arrow">→</span>
+      <div class="card-line" style="background:#ff0000"></div>
+    </a>
+    <a href="https://open.spotify.com/user/314qlsyj4uqyvp26hjbtyaqukyai" target="_blank" class="social-card">
+      <div class="card-icon">🎵</div>
+      <div class="card-info"><div class="card-platform">◈ SPOTIFY</div><div class="card-name">JUXTOTHX</div></div>
+      <span class="card-arrow">→</span>
+      <div class="card-line" style="background:#1db954"></div>
+    </a>
+    <a href="https://www.roblox.com/users/3936669840/profile" target="_blank" class="social-card">
+      <div class="card-icon">🎮</div>
+      <div class="card-info"><div class="card-platform">◈ ROBLOX</div><div class="card-name">JUXTOTHX</div></div>
+      <span class="card-arrow">→</span>
+      <div class="card-line" style="background:#e2231a"></div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">J·A·R·V·I·S</div>
+  <div class="footer-text">POWERED BY STARK INDUSTRIES · SIR ISAAC JUX HQ · ALL SYSTEMS NOMINAL</div>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,.cta-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.classList.add('h');ring.classList.add('h');});
+  el.addEventListener('mouseleave',()=>{cursor.classList.remove('h');ring.classList.remove('h');});
+});
+const msgs=["Welcome to Sir Isaac Jux's Headquarters.","Initializing intelligence network...","All systems nominal. Socials ready for access.","J.A.R.V.I.S online. How may I assist you?"];
+let mi=0,ci=0,del=false;
+const el=document.getElementById('typingText');
+function type(){
+  const m=msgs[mi];
+  if(!del){el.textContent=m.slice(0,++ci);if(ci===m.length){del=true;setTimeout(type,2200);return;}setTimeout(type,38);}
+  else{el.textContent=m.slice(0,--ci);if(ci===0){del=false;mi=(mi+1)%msgs.length;setTimeout(type,400);return;}setTimeout(type,18);}
+}
+setTimeout(type,1200);
+
+// JARVIS voice intro
+function speakIntro() {
+  if(!window.speechSynthesis) return;
+  const lines = [
+    "Welcome to Sir Isaac Jux Headquarters.",
+    "I am J.A.R.V.I.S. — Just A Rather Very Intelligent System.",
+    "All systems nominal. Intelligence network online.",
+    "Scroll down to access his socials, sir."
+  ];
+  const text = lines.join(' ');
+  const utt = new SpeechSynthesisUtterance(text);
+  const voices = window.speechSynthesis.getVoices();
+  const v = voices.find(v=>v.name.includes('Daniel')||v.name.includes('Google UK English Male')||v.name.includes('Microsoft George')||v.name.includes('English (UK)'));
+  if(v) utt.voice = v;
+  utt.rate = 0.85;
+  utt.pitch = 0.82;
+  utt.volume = 1;
+  utt.lang = 'en-GB';
+  window.speechSynthesis.speak(utt);
+}
+// Voices load async — wait for them then speak
+if(window.speechSynthesis.getVoices().length > 0) {
+  setTimeout(speakIntro, 800);
+} else {
+  window.speechSynthesis.onvoiceschanged = () => setTimeout(speakIntro, 800);
+}
+document.querySelector('.cta-btn').addEventListener('click',e=>{e.preventDefault();document.getElementById('socials').scrollIntoView({behavior:'smooth'});});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){e.target.style.animation=`fadeDown 0.6s ease ${i*0.1}s both`;obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.social-card').forEach(c=>{c.style.opacity='0';obs.observe(c);});
+</script>
+</body>
+</html>
